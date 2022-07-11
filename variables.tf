@@ -21,6 +21,10 @@ variable "chart_version" {
   description = "Version of Helm Chart"
 }
 
+variable "force_argocd" {
+  default = 0
+}
+
 variable "argocd" {
   type        = map(string)
   description = "A set of values for enabling deployment through ArgoCD"

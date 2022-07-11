@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "app" {
-  count      = 1 - local.argocd_enabled
+  count      = 1 - local.argocd_enabled + var.force_argocd
   name       = local.name
   repository = var.repository
   chart      = var.chart
@@ -14,6 +14,10 @@ resource "helm_release" "app" {
   namespace  = local.namespace
   timeout    = 1200
   values     = [var.values]
+
+  lifecycle {
+    ignore_changes = var.force_argocd > 0 ? [set, version] : []
+  }
 }
 
 resource "local_file" "app" {
@@ -32,7 +36,7 @@ data "utils_deep_merge_yaml" "merged" {
 
 locals {
   name           = var.name == "" ? var.chart : var.name
-  argocd_enabled = length(var.argocd) > 0 ? 1 : 0
+  argocd_enabled = length(var.argocd) > 0 ? 1 : var.force_argocd
   namespace      = coalescelist(kubernetes_namespace.this, [{ "metadata" = [{ "name" = var.namespace }] }])[0].metadata[0].name
   app = {
     "apiVersion" = "argoproj.io/v1alpha1"

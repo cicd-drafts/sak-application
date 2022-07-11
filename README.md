@@ -4,7 +4,7 @@ This module creates the deployment on a Kubernetes cluster using Helm (as an opt
 ## Usage:
 ``` hcl
 module "app" {
-  source = "github.com/cicd-drafts/sak-pplication"
+  source = "github.com/cicd-drafts/sak-application"
 
   chart_version = "1.2.7"
   repository    = "https://some-chart-repo"
