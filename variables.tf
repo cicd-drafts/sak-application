@@ -16,12 +16,6 @@ variable "namespace_name" {
   description = "A name of namespace for creating"
 }
 
-variable "cluster_name" {
-  type        = string
-  default     = null
-  description = "A name of the Amazon EKS cluster"
-}
-
 variable "chart_version" {
   default     = "0.1.0"
   description = "Version of Helm Chart"
