@@ -33,6 +33,12 @@ variable "argocd" {
   default     = {}
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "A tags for attaching to new created AWS resources"
+}
+
 variable "repository" {
   type        = string
   description = "A repository of Helm Chart"
@@ -48,10 +54,22 @@ variable "name" {
   description = "A name of the application"
 }
 
+variable "iam_permissions" {
+  type        = any
+  default     = []
+  description = "A list of IAM permissions required for application launch"
+}
+
 variable "service_account_name" {
   type        = string
   default     = ""
   description = "A name of the service account, in case of using custom SA name not matching with application name"
+}
+
+variable "irsa_annotation_field" {
+  type        = string
+  default     = "rbac.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+  description = "A filed name for specifying IRSA annotation"
 }
 
 variable "destination_server" {
