@@ -16,7 +16,7 @@ resource "helm_release" "app" {
   values     = [var.values]
 
   lifecycle {
-    ignore_changes = [set, version]
+    ignore_changes = [set, version, values]
   }
 }
 
