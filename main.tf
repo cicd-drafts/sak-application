@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "this" {
-  count = var.namespace == "default" ? 1 - local.argocd_enabled : var.force_argocd
+  count = var.namespace == "default" ? 1 - local.argocd_enabled : 0
   metadata {
     name = var.namespace_name
   }
