@@ -14,6 +14,8 @@ resource "helm_release" "app" {
   namespace  = local.namespace
   timeout    = 1200
   values     = [var.values]
+  
+  create_namespace = true
 
   lifecycle {
     ignore_changes = [set, version, values]
