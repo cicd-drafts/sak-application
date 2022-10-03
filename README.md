@@ -11,11 +11,11 @@ module "app" {
   name          = "some-app"
   chart         = "some-app"
 
-  values = yamlencode({
+  values = {
     rbac = {
       enabled = true
     }
-  })
+  }
   argocd = {
     namespace = "argocd"
     project   = "default"

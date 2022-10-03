@@ -18,7 +18,7 @@ resource "helm_release" "app" {
   version    = var.chart_version
   namespace  = local.namespace
   timeout    = 1200
-  values     = [var.values]
+  values     = [yamlencode(var.values)]
   set {
     name  = var.irsa_annotation_field
     value = local.aws_role_arn
@@ -96,7 +96,7 @@ locals {
             ]
           },
           {
-            "values" = var.values
+            "values" = yamlencode(var.values)
           }
         )
       }

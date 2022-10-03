@@ -1,6 +1,6 @@
 variable "values" {
-  type        = string
-  default     = ""
+  type        = map
+  default     = {}
   description = "A values for Helm Chart in YAML format"
 }
 

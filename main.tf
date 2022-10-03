@@ -13,7 +13,7 @@ resource "helm_release" "app" {
   version    = var.chart_version
   namespace  = local.namespace
   timeout    = 1200
-  values     = [var.values]
+  values     = [yamlencode(var.values)]
   
   create_namespace = true
 
@@ -58,7 +58,7 @@ locals {
         "targetRevision" = var.chart_version
         "chart"          = var.chart
         "helm" = {
-          "values" = var.values
+          "values" = yamlencode(var.values)
         }
       }
       "syncPolicy" = {
